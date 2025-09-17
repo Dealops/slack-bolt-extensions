@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 
-import { PrismaClient } from '@prisma/client';
 import { ConsoleLogger } from '@slack/logger';
 import {
   Installation,
@@ -9,11 +8,11 @@ import {
   Logger,
 } from '@slack/oauth';
 
-import PrismaInstallationStoreArgs from './PrismaInstallationStoreArgs';
+import PrismaInstallationStoreArgs, { type MinimalPrismaClient } from './PrismaInstallationStoreArgs';
 import { StoreInstallationCallbackArgs, FetchInstallationCallbackArgs, DeleteInstallationCallbackArgs } from './PrismaInstallationStoreCallbackArgs';
 
 export default class PrismaInstallationStore implements InstallationStore {
-  private prismaClient?: PrismaClient;
+  private prismaClient?: MinimalPrismaClient;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private prismaTable: any;

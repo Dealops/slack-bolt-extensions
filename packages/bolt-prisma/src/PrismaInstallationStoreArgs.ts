@@ -1,7 +1,15 @@
-import { PrismaClient } from '@prisma/client';
 import { Logger } from '@slack/logger';
 
 import { DeleteInstallationCallbackArgs, FetchInstallationCallbackArgs, StoreInstallationCallbackArgs } from './PrismaInstallationStoreCallbackArgs';
+
+/**
+ * Minimal surface we actually need from any Prisma client.
+ * Structural type keeps us compatible with all generators.
+ */
+export type MinimalPrismaClient = {
+  $disconnect: () => Promise<void>;
+};
+
 
 export default interface PrismaInstallationStoreArgs {
 
@@ -15,7 +23,7 @@ export default interface PrismaInstallationStoreArgs {
    * If you use #close() method to disconnect from the database server,
    * pass this option.
    */
-  prismaClient?: PrismaClient, // for #close() method
+  prismaClient?: MinimalPrismaClient, // for #close() method
 
   /**
    * For managing multiple Slack apps in a single database table
